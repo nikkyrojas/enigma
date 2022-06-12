@@ -1,14 +1,5 @@
 class Enigma
-  attr_reader :encrypted, :decrypted
-
-  def encrypt(message) #key_string = make_key, date_string = make_date)
-    @encrypted = ({
-      encryption: encrypted_string,
-      key:        key_string,
-      date:       date_string
-      })
-    end
-
+  attr_reader :encrypt, :decrypt, :encrypted, :decrypted
 
   def make_key
     random_numbers = []
@@ -20,6 +11,19 @@ class Enigma
 
   def make_date
     Time.now.strftime("%d%m%y")
+  end
+
+  def 
+
+  def encrypted_string
+  end
+
+  def encrypt(message, key = make_key, date = make_date)
+    @encrypted = ({
+      encryption: encrypted_string,
+      key:        key,
+      date:       date
+      })
   end
 
 
