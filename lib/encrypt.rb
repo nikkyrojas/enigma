@@ -1,68 +1,61 @@
-require_relative 'enigma'
-require_relative 'makeable'
+require 'date'
+# require_relative 'makeable'
 class Encrypt
-  include Makeable
-
-  def make_key_sets
-    convert_to_i = random_numbers.to_i
-    split_numbers = convert_to_i.digits
-    a_key_join = split_numbers[0..1].join
-    b_key_join = split_numbers[1..2].join
-    c_key_join = split_numbers[2..3].join
-    d_key_join = split_numbers[3..4].join
+  attr_reader :random_numbers,
+  # include Makeable
+  def initialize
+    @random_numbers = []
   end
 
-  def make_keys_shifts
-    key_shifts = {
-    :a_key => a_key_join,
-    :b_key => b_key_join,
-    :c_key => c_key_join,
-    :d_key => d_key_join
-  }
+  def make_key
+  5.times.map{rand(10)}.join
   end
 
-  def offsets(date)
+  def make_date
+    Time.now.strftime("%d%m%y")
+  end
+
+  def make_key_index(generated_key)
+    index = []
+    index << generated_key[0..1]
+    index << generated_key[1..2]
+    index << generated_key[2..3]
+    index << generated_key[3..4]
+    index
+  end
+
+  def make_offsets(date)
     date_squared = (date.to_i * date.to_i).to_s
     last_four = date_squared.split(//).last(4)
-      offset = {
-      :a => last_four[0],
-      :b => last_four[1],
-      :c => last_four[2],
-      :d => last_four[3]
-     }
+    last_four
   end
 
-  def final_shifts
-    {
-    :A => offset.a + key_shifts.a_key,
-    :B => offset.b + key_shifts.b_key,
-    :C => offset.c + key_shifts.c_key,
-    :D => offset.d + key_shifts.d_key
-   }
+  def make_final_shifts(key_index, offsets)
+    final_shifts = {
+      :A => (key_index[0].to_i + offsets[0].to_i),
+      :B => (key_index[1].to_i + offsets[1].to_i),
+      :C => (key_index[2].to_i + offsets[2].to_i),
+      :D => (key_index[3].to_i + offsets[3].to_i)
+    }
   end
 
   def split_message(message)
-    split_message = message.downcase.chars
-  end
-
-  def group_split_message_by_four_characters
-    message_groups = split_message.each_slice(4).to_a
-    #makes arrays of 4 characters for each shift group (ABCD)
-  end
-
-  def assign_character_an_index
-    shift_groups = {}
-
+    seperate_characters = message.downcase.chars
+    seperate_characters.each_slice(4).to_a
   end
 
   def create_alphabet
     alphabet = ("a".."z").to_a << " "
+  end
+
+  def rotate_message(message, final_shifts)
+    split_message(message).count #give count of 3
 
   end
 
-  def shift_letter_in_group_by_key
-
-  end
+  # def shift_letter_in_group_by_key
+  #
+  # end
 
 
 end
