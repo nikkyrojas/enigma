@@ -1,30 +1,25 @@
+require_relative 'encrypt'
+require_relative 'makeable'
 class Enigma
-  attr_reader :encrypt, :decrypt, :encrypted, :decrypted
-
-  def make_key
-    random_numbers = []
-    5.times do
-      random_numbers << rand(1..9)
-      end
-    random_numbers.join
-  end
-
-  def make_date
-    Time.now.strftime("%d%m%y")
-  end
-
-  def 
-
-  def encrypted_string
-  end
+  include Makeable
+  attr_reader :encrypted, :decrypted,
 
   def encrypt(message, key = make_key, date = make_date)
+    # encrypted_msg = Encrypt.new.encrypted_msg
     @encrypted = ({
-      encryption: encrypted_string,
+      encryption: encrypted_msg,
       key:        key,
       date:       date
       })
   end
 
+  def decrypt(message, key, date)
+     # decrypted_msg =
+    @decrypted = ({
+      decryption: decrypted_msg,
+      key:        key,
+      date:       date
+      })
+  end
 
 end
