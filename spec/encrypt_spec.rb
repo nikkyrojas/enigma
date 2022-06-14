@@ -7,3 +7,4 @@ RSpec.describe Encrypt do
     # @enigma = Enigma.new
     @encrypt = Encrypt.new
   end
+end

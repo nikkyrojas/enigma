@@ -14,7 +14,8 @@
 #decrption is going in reverse given a date and key
 #.strftime('%d/%m/%Y')
 require "./lib/enigma"
-# require_relative 'makeable'
+require './lib/makeable'
+require './lib/ciphen'
 # require_relative 'encrypt'
 require 'rspec'
 require 'pry'
@@ -32,8 +33,16 @@ RSpec.describe Enigma do
     expect(@enigma.encrypt("hello")).to be_a(Hash)
   end
 
-  xit "creates a hash with the decrypt method" do
-    expect(@enigma.decrypt).to eq(@decrypted)
+  it "creates a hash with the decrypt method" do
+    expect(@enigma.decrypt).to be_a(Hash)
+  end
+
+  it "can encrypt a message" do
+    expect(@ciphen.encrypt_msg("hello world", "02715", "040895")).to eq("keder ohulw")
+  end
+
+  it "can decrypt a message" do
+    expect(@ciphen.decrypt_msg("keder ohulw", "02715", "040895")).to eq("hello world")
   end
 
 end

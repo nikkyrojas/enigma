@@ -39,22 +39,16 @@ RSpec.describe Ciphen do
     expect(@ciphen.make_final_shifts(key_index, offsets)).to be_a(Array)
   end
 
-  xit "can split message into charactes of 4" do
-    expect(@ciphen.split_message("hello world")).to eq(["h","e","l","l","o"," ","w","o","r","l","d"])
+  it "can split message into charactes" do
+    expect(@ciphen.split_message("Hello world")).to eq(["h","e","l","l","o"," ","w","o","r","l","d"])
   end
 
   it "can encrypt a message" do
-    expect(@ciphen.encrypt_msg("hello world!")).to eq(keder ohulw)
-
+    expect(@ciphen.encrypt_msg("hello world", "02715", "040895")).to eq("keder ohulw")
   end
 
-
-  xit "can encrypt each letter by its final shift key" do
-    generated_key = @ciphen.make_key
-    key_index = @ciphen.make_key_index(generated_key)
-    date = @ciphen.make_date
-    offsets = @ciphen.make_offsets(date)
-    final_shifts = @ciphen.make_final_shifts(key_index, offsets)
-    expect(@ciphen.rotate_message("hello world", final_shifts)).to be_a(String)
+  it "can decrypt a message" do
+    expect(@ciphen.decrypt_msg("keder ohulw", "02715", "040895")).to eq("hello world")
   end
+
 end

@@ -1,18 +1,10 @@
 require 'date'
-# require_relative 'makeable'
+require_relative 'makeable'
 class Ciphen
-  # include Makeable
+  include Makeable
 attr_reader :alphabet
   def initialize
     @alphabet = ("a".."z").to_a << " "
-  end
-
-  def make_key
-  5.times.map{rand(10)}.join
-  end
-
-  def make_date
-    Time.now.strftime("%d%m%y")
   end
 
   def make_key_index(generated_key)
@@ -31,9 +23,9 @@ attr_reader :alphabet
   end
 
   def make_final_shifts(key_index, offsets)
-      [(key_index[0].to_i + offsets[0].to_i), (key_index[1].to_i + offsets[1].to_i),
-      (key_index[2].to_i + offsets[2].to_i),
-      (key_index[3].to_i + offsets[3].to_i)]
+    [(key_index[0].to_i + offsets[0].to_i), (key_index[1].to_i + offsets[1].to_i),
+    (key_index[2].to_i + offsets[2].to_i),
+    (key_index[3].to_i + offsets[3].to_i)]
   end
 
   def split_message(message)
@@ -55,6 +47,23 @@ attr_reader :alphabet
         shift_count = 0
       end
     end
-      ciphened_letters
+      ciphened_letters.join
+  end
+
+  def decrypt_msg(message, key, date)
+    key_index = make_key_index(key)
+    offsets = make_offsets(date)
+    final_shifts = make_final_shifts(key_index, offsets)
+    shift_count = 0
+    unciphened_letters = []
+    split_message(message).each do |letter|
+      rotated_alphabet = @alphabet.rotate(@alphabet.find_index(letter))
+      unciphened_letters << rotated_alphabet.rotate(-final_shifts[shift_count])[0]
+      shift_count += 1
+      if shift_count == 4
+        shift_count = 0
+      end
+    end
+      unciphened_letters.join
   end
 end
