@@ -1,7 +1,6 @@
 require './lib/enigma'
 require './lib/makeable'
 require 'pry'
-include Makeable
 
 enigma = Enigma.new
 
