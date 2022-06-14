@@ -40,11 +40,15 @@ attr_reader :alphabet
     shift_count = 0
     ciphened_letters = []
     split_message(message).each do |letter|
-      rotated_alphabet = @alphabet.rotate(@alphabet.find_index(letter))
-      ciphened_letters << rotated_alphabet.rotate(final_shifts[shift_count])[0]
-      shift_count += 1
-      if shift_count == 4
-        shift_count = 0
+      if @alphabet.include?(letter)
+        rotated_alphabet = @alphabet.rotate(@alphabet.find_index(letter))
+        ciphened_letters << rotated_alphabet.rotate(final_shifts[shift_count])[0]
+        shift_count += 1
+          if shift_count == 4
+            shift_count = 0
+          end
+      else
+        ciphened_letters << letter
       end
     end
       ciphened_letters.join
@@ -57,11 +61,15 @@ attr_reader :alphabet
     shift_count = 0
     unciphened_letters = []
     split_message(message).each do |letter|
-      rotated_alphabet = @alphabet.rotate(@alphabet.find_index(letter))
-      unciphened_letters << rotated_alphabet.rotate(-final_shifts[shift_count])[0]
-      shift_count += 1
-      if shift_count == 4
-        shift_count = 0
+      if @alphabet.include?(letter)
+        rotated_alphabet = @alphabet.rotate(@alphabet.find_index(letter))
+        unciphened_letters << rotated_alphabet.rotate(-final_shifts[shift_count])[0]
+        shift_count += 1
+        if shift_count == 4
+          shift_count = 0
+        end
+      else
+        unciphened_letters << letter
       end
     end
       unciphened_letters.join
