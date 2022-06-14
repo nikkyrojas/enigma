@@ -28,24 +28,24 @@ RSpec.describe Enigma do
     expect(@enigma).to be_a(Enigma)
   end
 
-  # xit "encrypt method has a encrypted string" do
-  #   expect(@enigma.encrypt.encryption).to eq(encrypted_string)
-  # end
-  #
-  # xit "encrypt method has a key for encrypted string" do
-  #   expect(@enigma.encrypt.key).to eq(key_string)
-  # end
-  #
-  # xit "encrypt method has date used for encrypted string in ddmmyy format" do
-  #   expect(@enigma.encrypt.date).to eq(date_string)
-  # end
-
   it "creates a hash with the encrypt method" do
-    expect(@enigma.encrypt).to eq(@encrypted)
+    expect(@enigma.encrypt("hello")).to be_a(Hash)
   end
 
   xit "creates a hash with the decrypt method" do
-    expect(@enigma.decrypt("", "", "")).to eq(@decrypted)
+    expect(@enigma.decrypt).to eq(@decrypted)
   end
 
 end
+
+#it "encrypt method has a encrypted string" do
+#   expect(@enigma.encrypt.encryption).to eq(encrypted_msg)
+# end
+#
+# xit "encrypt method has a key for encrypted string" do
+#   expect(@enigma.encrypt.key).to eq(key_string)
+# end
+#
+# xit "encrypt method has date used for encrypted string in ddmmyy format" do
+#   expect(@enigma.encrypt.date).to eq(date_string)
+# end
