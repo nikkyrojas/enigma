@@ -1,21 +1,18 @@
 require_relative 'encrypt'
-# require_relative 'makeable'
-class Enigma
-  include Makeable
-  attr_reader :encrypted, :decrypted,
-
+require_relative 'ciphen'
+class Enigma < Ciphen
   def encrypt(message, key = make_key, date = make_date)
-    # encrypted_msg = Encrypt.encrypted_msg
-    @encrypted = ({
-      encryption: encrypted_msg,
+    encrypted_msg = encrypt_msg(message, key, date)
+    ({
+      encryption: encrypted_msg.join,
       key:        key,
       date:       date
       })
   end
 
   def decrypt(message, key, date)
-     # decrypted_msg =
-    @decrypted = ({
+     # decrypted_msg = Decrypt.decrypted_msg
+     ({
       decryption: decrypted_msg,
       key:        key,
       date:       date

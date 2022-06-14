@@ -1,5 +1,7 @@
 require 'simplecov'
 SimpleCov.start
-require 'enigma_spec'
-require 'enicrypt_spec'
-require 'makeable_spec'
+
+require './lib/enigma_spec'
+require './lib/encrypt_spec'
+require './lib/makeable_spec'
+require './lib/ciphen'
