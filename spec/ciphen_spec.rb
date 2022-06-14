@@ -1,15 +1,13 @@
 require "./lib/ciphen"
 require 'pry'
 require 'rspec'
-# require "./lib/enigma"
+
 RSpec.describe Ciphen do
   before(:each) do
-    # @enigma = Enigma.new
     @ciphen = Ciphen.new
   end
 
   it "exists" do
-    # expect(@enigma).to be_a(Enigma)
     expect(@ciphen).to be_a(Ciphen)
   end
 
@@ -39,7 +37,7 @@ RSpec.describe Ciphen do
     expect(@ciphen.make_final_shifts(key_index, offsets)).to be_a(Array)
   end
 
-  it "can split message into charactes" do
+  it "can split message into individual characters" do
     expect(@ciphen.split_message("Hello world")).to eq(["h","e","l","l","o"," ","w","o","r","l","d"])
   end
 
@@ -50,5 +48,4 @@ RSpec.describe Ciphen do
   it "can decrypt a message" do
     expect(@ciphen.decrypt_msg("keder ohulw", "02715", "040895")).to eq("hello world")
   end
-
 end

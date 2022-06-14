@@ -1,13 +1,12 @@
 require './lib/enigma'
 require './lib/makeable'
-require 'pry'
 
 enigma = Enigma.new
 
 message_file = File.open(ARGV[0], "r")
-
 message = message_file.read
 message_file.close
+
 encrypted_msg = enigma.encrypt(message)
 message_output = File.open(ARGV[1], "w")
 message_output.write(encrypted_msg[:encryption])
